@@ -90,6 +90,45 @@
       color: white;
       padding: 100px 0 60px;
     }
+
+    #preloader { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+  </style>
+  <!-- Lazy Loading CSS -->
+  <style>
+    .lazy-image {
+      background-color: #f0f0f0;
+      background-image: linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0),
+                        linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+      transition: opacity 0.3s ease;
+    }
+    
+    .lazy-image.loaded {
+      background: none;
+    }
+    
+    .lazy-loading-spinner {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 30px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    
+    .loading .lazy-loading-spinner {
+      display: block;
+    }
   </style>
 </head>
 
@@ -157,7 +196,8 @@
           <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="city-card" data-aos="zoom-in" data-aos-delay="100">
               <a href="新疆伊犁.html" class="city-link">
-                <img src="assets/img/Collect/China/新疆伊犁.jpg" alt="新疆伊犁">
+                <img src="assets/img/Collect/China/新疆伊犁.jpg" alt="新疆伊犁" class="lazy-image" loading="lazy">
+                <div class="lazy-loading-spinner"></div>
                 <div class="city-card-content">
                   <h3>新疆伊犁</h3>
                 </div>
@@ -168,7 +208,8 @@
           <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="city-card" data-aos="zoom-in" data-aos-delay="100">
               <a href="山西大同.html" class="city-link">
-                <img src="assets/img/Collect/China/山西大同.jpg" alt="山西大同">
+                <img data-src="assets/img/Collect/China/山西大同.jpg" alt="山西大同" class="lazy-image" loading="lazy">
+                <div class="lazy-loading-spinner"></div>
                 <div class="city-card-content">
                   <h3>山西大同</h3>
                 </div>
@@ -179,7 +220,8 @@
           <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="city-card" data-aos="zoom-in" data-aos-delay="100">
               <a href="福建厦门.html" class="city-link">
-                <img src="assets/img/Collect/China/福建厦门.jpg" alt="福建厦门">
+                <img data-src="assets/img/Collect/China/福建厦门.jpg" alt="福建厦门" class="lazy-image" loading="lazy">
+                <div class="lazy-loading-spinner"></div>
                 <div class="city-card-content">
                   <h3>福建厦门</h3>
                 </div>
@@ -190,7 +232,8 @@
           <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="city-card" data-aos="zoom-in" data-aos-delay="100">
               <a href="上海.html" class="city-link">
-                <img src="assets/img/Collect/China/上海.jpg" alt="上海">
+                <img data-src="assets/img/Collect/China/上海.jpg" alt="上海" class="lazy-image" loading="lazy">
+                <div class="lazy-loading-spinner"></div>
                 <div class="city-card-content">
                   <h3>上海</h3>
                 </div>
@@ -230,6 +273,50 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Lazy Loading JS -->
+  <script>
+    function initLazyLoading() {
+      const lazyImages = document.querySelectorAll('img[data-src]');
+      
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              const container = img.closest('.gallery-item, .city-card');
+              
+              // 显示加载动画
+              if (container) container.classList.add('loading');
+              
+              // 加载图片
+              img.src = img.dataset.src;
+              
+              img.addEventListener('load', () => {
+                // 图片加载完成
+                img.classList.add('loaded');
+                if (container) container.classList.remove('loading');
+                observer.unobserve(img);
+              });
+              
+              img.addEventListener('error', () => {
+                // 图片加载失败
+                if (container) container.classList.remove('loading');
+                observer.unobserve(img);
+              });
+            }
+          });
+        });
+
+        lazyImages.forEach(img => {
+          imageObserver.observe(img);
+        });
+      }
+    }
+
+    // 页面加载完成后初始化懒加载
+    document.addEventListener('DOMContentLoaded', initLazyLoading);
+  </script>
 
 </body>
 
