@@ -13,8 +13,8 @@
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com  " rel="preconnect">
+  <link href="https://fonts.gstatic.com  " rel="preconnect" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Cardo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet">
@@ -80,44 +80,6 @@
     @media (max-width: 480px) {
       .gallery-item { width: 100%; }
     }
-  </style>
-  <!-- Lazy Loading CSS -->
-  <style>
-    .lazy-image {
-      background-color: #f0f0f0;
-      background-image: linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0),
-                        linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0);
-      background-size: 20px 20px;
-      background-position: 0 0, 10px 10px;
-      transition: opacity 0.3s ease;
-    }
-    
-    .lazy-image.loaded {
-      background: none;
-    }
-    
-    .lazy-loading-spinner {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 30px;
-      height: 30px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 1s ease-in-out infinite;
-    }
-    
-    @keyframes spin {
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-    
-    .loading .lazy-loading-spinner {
-      display: block;
-    }
-
     #preloader { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
   </style>
 </head>
@@ -142,10 +104,10 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
       <div class="header-social-links">
-        <a href="https://www.douyin.com/" class="douyin" target="_blank" title="抖音">
+        <a href="  https://www.douyin.com/  " class="douyin" target="_blank" title="抖音">
           <img src="assets/img/douyin.png" alt="抖音" style="width: 20px; height: 20px;">
         </a>
-        <a href="https://www.xiaohongshu.com/" class="xiaohongshu" target="_blank" title="小红书">
+        <a href="https://www.xiaohongshu.com/  " class="xiaohongshu" target="_blank" title="小红书">
           <img src="assets/img/xiaohongshu.png" alt="小红书" style="width: 20px; height: 20px;">
         </a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
@@ -205,13 +167,13 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Masonry & ImagesLoaded -->
-  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js  "></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js  "></script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <!-- Gallery Initialization -->
+  <!-- Gallery Initialization without Lazy Loading -->
    <script>
     const shanxiImages = [
       { src: "assets/img/Collect/山西大同/山西大同-1.webp", title: "山西大同 1" },
@@ -236,12 +198,12 @@
     document.addEventListener('DOMContentLoaded', function () {
       const container = document.getElementById('gallery-container');
 
-      // 生成画廊项
+      // 生成画廊项 - 直接使用 src
       let html = '';
       shanxiImages.forEach(image => {
         html += `
           <div class="gallery-item">
-            <img src="${image.src}" alt="${image.title}">
+            <img src="${image.src}" alt="${image.title}" loading="lazy"> <!-- Removed data-src, class, and spinner div -->
             <div class="gallery-links">
               <a href="${image.src}" title="${image.title}" class="glightbox preview-link">
                 <i class="bi bi-arrows-angle-expand"></i>
