@@ -13,8 +13,8 @@
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com  " rel="preconnect">
-  <link href="https://fonts.gstatic.com  " rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com    " rel="preconnect">
+  <link href="https://fonts.gstatic.com    " rel="preconnect" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Cardo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet">
@@ -82,44 +82,6 @@
       .gallery-item { width: 100%; }
     }
 
-    /* Lazy Loading CSS */
-    .lazy-image {
-      background-color: #f0f0f0;
-      background-image: linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0),
-                        linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0);
-      background-size: 20px 20px;
-      background-position: 0 0, 10px 10px;
-      transition: opacity 0.3s ease;
-      opacity: 1; /* 初始显示占位符 */
-    }
-    
-    .lazy-image.loaded {
-      background: none; /* 图片加载后移除占位符背景 */
-      opacity: 1; /* 确保加载后完全显示 */
-    }
-
-    .lazy-loading-spinner {
-      display: block; /* 默认显示加载动画 */
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 30px;
-      height: 30px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 1s ease-in-out infinite;
-    }
-    
-    .lazy-image.loaded + .lazy-loading-spinner {
-      display: none; /* 图片加载后隐藏加载动画 */
-    }
-    
-    @keyframes spin {
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
     #preloader { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
   </style>
 </head>
@@ -144,10 +106,10 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
       <div class="header-social-links">
-        <a href="  https://www.douyin.com/  " class="douyin" target="_blank" title="抖音">
+        <a href="    https://www.douyin.com/    " class="douyin" target="_blank" title="抖音">
           <img src="assets/img/douyin.png" alt="抖音" style="width: 20px; height: 20px;">
         </a>
-        <a href="https://www.xiaohongshu.com/  " class="xiaohongshu" target="_blank" title="小红书">
+        <a href="https://www.xiaohongshu.com/    " class="xiaohongshu" target="_blank" title="小红书">
           <img src="assets/img/xiaohongshu.png" alt="小红书" style="width: 20px; height: 20px;">
         </a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
@@ -207,13 +169,13 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Masonry & ImagesLoaded -->
-  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js  "></script>
-  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js  "></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js    "></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js    "></script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <!-- Gallery Initialization with Lazy Loading -->
+  <!-- Gallery Initialization without Lazy Loading -->
   <script>
     const xiamenImages = [
       { src: "assets/img/Collect/福建厦门/福建厦门-1.webp", title: "福建厦门 1" },
@@ -238,13 +200,12 @@
     document.addEventListener('DOMContentLoaded', function () {
       const container = document.getElementById('gallery-container');
 
-      // 生成画廊项 - 使用 data-src 代替 src
+      // 生成画廊项 - 使用 src 直接加载
       let html = '';
       xiamenImages.forEach(image => {
         html += `
           <div class="gallery-item">
-            <img data-src="${image.src}" alt="${image.title}" class="lazy-image" loading="lazy">
-            <div class="lazy-loading-spinner"></div>
+            <img src="${image.src}" alt="${image.title}" loading="lazy"> <!-- Removed data-src, class, and spinner div -->
             <div class="gallery-links">
               <a href="${image.src}" title="${image.title}" class="glightbox preview-link">
                 <i class="bi bi-arrows-angle-expand"></i>
@@ -255,63 +216,21 @@
       });
       container.innerHTML = html;
 
-      // 获取所有懒加载图片元素
-      const lazyImages = container.querySelectorAll('img[data-src]');
-
-      // 创建 Intersection Observer 实例
-      const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) { // 当图片元素进入视口
-            const img = entry.target;
-            const imgSrc = img.dataset.src; // 获取真实的图片地址
-
-            // 创建一个新的 Image 对象来加载图片
-            const newImg = new Image();
-            newImg.onload = function() {
-              // 图片加载成功后
-              img.src = imgSrc; // 设置 img 元素的 src
-              img.classList.remove('lazy-image'); // 移除占位符样式类
-              img.classList.add('loaded'); // 添加 loaded 类，触发 CSS 过渡
-              imageObserver.unobserve(img); // 停止观察该元素
-            };
-            newImg.onerror = function() {
-              // 图片加载失败时的处理（可选）
-              console.error('Failed to load image:', imgSrc);
-              img.classList.remove('lazy-image');
-              img.classList.add('loaded');
-              imageObserver.unobserve(img);
-            };
-            newImg.src = imgSrc; // 开始加载图片
-          }
-        });
-      }, {
-        rootMargin: '50px' // 提前 50px 开始加载，提升体验
-      });
-
-      // 开始观察所有懒加载图片
-      lazyImages.forEach(img => {
-        imageObserver.observe(img);
-      });
-
       // 初始化 Masonry 和 GLightbox
-      // 确保在图片加载完成后再初始化 Masonry，以获得正确的布局
-      const msnry = new Masonry(container, {
-        itemSelector: '.gallery-item',
-        percentPosition: true,
-        gutter: 16
+      // 等待图片加载完成后再初始化 Masonry
+      imagesLoaded(container, function() {
+        const msnry = new Masonry(container, {
+          itemSelector: '.gallery-item',
+          percentPosition: true,
+          gutter: 16
+        });
+
+        // 初始化 GLightbox
+        const lightbox = GLightbox({
+          selector: '.glightbox'
+        });
       });
 
-      // 由于图片是懒加载的，需要在图片加载后重新布局
-      container.addEventListener('load', function(e) {
-        if (e.target.classList.contains('loaded')) {
-          msnry.layout();
-        }
-      }, true); // 使用事件捕获，确保能监听到子元素的 load 事件
-
-      // 初始化 GLightbox
-      const lightbox = GLightbox({
-        selector: '.glightbox'
-      });
     });
   </script>
   
