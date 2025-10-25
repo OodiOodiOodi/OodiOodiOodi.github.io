@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>United States</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Cardo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .cities-section {
+      padding: 60px 0;
+    }
+    
+    .city-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+    
+    .city-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .city-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .city-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .city-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      color: white;
+      padding: 20px;
+    }
+    
+    .city-card h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .city-card p {
+      margin: 5px 0 0;
+      opacity: 0.9;
+    }
+    
+    .city-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .page-title {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/img/us-banner.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 100px 0 60px;
+    }
+  </style>
+</head>
+
+<body class="united-states-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">Zhang Yaohui</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li class="dropdown"><a href="China.html" class="active"><span>China</span></a></li>
+          <li class="dropdown"><a href="UnitedStates.html" class="active"><span>United States</span></a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <div class="header-social-links">
+        <a href="https://www.douyin.com/" class="douyin" target="_blank" title="抖音">
+          <img src="assets/img/douyin.png" alt="抖音" style="width: 20px; height: 20px;">
+        </a>
+        <a href="https://www.xiaohongshu.com/" class="xiaohongshu" target="_blank" title="小红书">
+          <img src="assets/img/xiaohongshu.png" alt="小红书" style="width: 20px; height: 20px;">
+        </a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>United States</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">United States</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Cities Section -->
+    <section id="cities" class="cities-section section">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <h2>American Cities</h2>
+        </div>
+
+        <div class="row gy-4">
+          <!-- Los Angeles -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="city-card" data-aos="zoom-in" data-aos-delay="100">
+              <a href="LosAngeles.html" class="city-link">
+                <img src="assets/img/Collect/UnitedStates/LosAngeles.jpg" alt="Los Angeles">
+                <div class="city-card-content">
+                  <h3>Los Angeles</h3>
+                </div>
+              </a>
+            </div>
+          </div><!-- End City Item -->
+
+          <!-- San Francisco -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="city-card" data-aos="zoom-in" data-aos-delay="200">
+              <a href="SanFrancisco.html" class="city-link">
+                <img src="assets/img/Collect/UnitedStates/SanFrancisco.jpg" alt="San Francisco">
+                <div class="city-card-content">
+                  <h3>San Francisco</h3>
+                </div>
+              </a>
+            </div>
+          </div><!-- End City Item -->
+
+          <!-- New York -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="city-card" data-aos="zoom-in" data-aos-delay="300">
+              <a href="NewYork.html" class="city-link">
+                <img src="assets/img/Collect/UnitedStates/NewYork.jpg" alt="New York">
+                <div class="city-card-content">
+                  <h3>New York</h3>
+                </div>
+              </a>
+            </div>
+          </div><!-- End City Item -->
+
+          <!-- Chicago -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="city-card" data-aos="zoom-in" data-aos-delay="400">
+              <a href="Chicago.html" class="city-link">
+                <img src="assets/img/Collect/UnitedStates/Chicago.jpg" alt="Chicago">
+                <div class="city-card-content">
+                  <h3>Chicago</h3>
+                </div>
+              </a>
+            </div>
+          </div><!-- End City Item -->
+
+          
+        </div>
+      </div>
+    </section><!-- /Cities Section -->
+
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <p class="fs-5">zhangyaohui200305@163.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="line"></div>
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

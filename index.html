@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Zhang Yaohui</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Cardo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">  <!--Bootstrap框架CSS-->
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">  <!--Bootstrap官方图标库-->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">  <!--AOS动画库-->
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">  <!--GLightbox灯箱库-->
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">  <!--Swiper轮播库-->
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+</head>
+
+<body class="index-page">
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">Zhang Yaohui</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li class="dropdown"><a href="China.html" class="active"><span>China</span></a></li>
+          <li class="dropdown"><a href="UnitedStates.html" class="active"><span>United States</span></a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <div class="header-social-links">
+        <a href="https://www.douyin.com/" class="douyin" target="_blank" title="抖音">
+          <img src="assets/img/douyin.png" alt="抖音" style="width: 20px; height: 20px;">
+        </a>
+        <a href="https://www.xiaohongshu.com/" class="xiaohongshu" target="_blank" title="小红书">
+          <img src="assets/img/xiaohongshu.png" alt="小红书" style="width: 20px; height: 20px;">
+        </a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
+            <h2><span>I'm </span><span class="underlight">Zhang Yaohui</span></h2>
+            <!-- <a href="contact.html" class="btn-get-started">Available for Hire<br></a> -->
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery section">
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4 justify-content-center" id="gallery-container">
+          <!-- 图片将通过JavaScript动态插入 -->
+        </div>
+      </div>
+    </section><!-- /Gallery Section -->
+
+    <script>
+    // 图片数据数组
+    const galleryImages = [
+      { src: "assets/img/gallery/gallery-1.jpg", title: "Gallery 1" },
+      { src: "assets/img/gallery/gallery-2.jpg", title: "Gallery 2" },
+      { src: "assets/img/gallery/gallery-3.jpg", title: "Gallery 3" },
+      { src: "assets/img/gallery/gallery-4.jpg", title: "Gallery 4" },
+      { src: "assets/img/gallery/gallery-5.jpg", title: "Gallery 5" },
+      { src: "assets/img/gallery/gallery-6.jpg", title: "Gallery 6" },
+      { src: "assets/img/gallery/gallery-7.jpg", title: "Gallery 7" },
+      { src: "assets/img/gallery/gallery-8.jpg", title: "Gallery 8" }
+    ];
+
+    // 生成画廊HTML
+    function generateGallery() {
+      const container = document.getElementById('gallery-container');
+      
+      galleryImages.forEach((image, index) => {
+        const galleryItem = `
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="${image.src}" class="img-fluid" alt="${image.title}">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="${image.src}" title="${image.title}" class="glightbox preview-link">
+                  <i class="bi bi-arrows-angle-expand"></i>
+                </a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+        `;
+        container.innerHTML += galleryItem;
+      });
+    }
+
+    // 页面加载完成后执行
+    document.addEventListener('DOMContentLoaded', generateGallery);
+    </script>
+
+  </main>
+  
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <p class="fs-5">zhangyaohui200305@163.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="line"></div>
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
