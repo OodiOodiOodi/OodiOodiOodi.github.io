@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>奥林匹克森林公园 - Zhang Yaohui</title>
+  <meta name="description" content="奥林匹克森林公园 photography collection by Zhang Yaohui">
+  <meta name="keywords" content="奥林匹克森林公园, photography, travel, Zhang Yaohui">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Inter:wght@300;400;500;600&family=Cardo:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- 自定义 CSS: Masonry 布局 -->
+  <style>
+    /* Masonry 容器 */
+    #gallery-container {
+      display: block;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      width: calc(33.333% - 16px); /* 4列，16px = 2 * 8px 间隙 */
+      margin-bottom: 16px;
+      break-inside: avoid;
+      position: relative;
+      padding: 0;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      object-fit: cover; /* 确保图片内容适应容器 */
+    }
+
+    .gallery-links {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    .gallery-item:hover .gallery-links {
+      opacity: 1;
+    }
+
+    /* 响应式 */
+    @media (max-width: 992px) {
+      .gallery-item { width: calc(33.333% - 16px); }
+    }
+    @media (max-width: 768px) {
+      .gallery-item { width: calc(50% - 16px); }
+    }
+    @media (max-width: 480px) {
+      .gallery-item { width: 100%; }
+    }
+
+    #preloader { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+  </style>
+</head>
+
+<body class="index-page">
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">Zhang Yaohui</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li class="dropdown"><a href="China.html" class="active"><span>China</span></a></li>
+          <li class="dropdown"><a href="新疆伊犁.html"><span>新疆伊犁</span></a></li>
+          <li class="dropdown"><a href="山西大同.html"><span>山西大同</span></a></li>
+          <li class="dropdown"><a href="福建厦门.html"><span>福建厦门</span></a></li>
+          <li class="dropdown"><a href="上海.html"><span>上海</span></a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <div class="header-social-links">
+        <a href="    https://www.douyin.com/    " class="douyin" target="_blank" title="抖音">
+          <img src="assets/img/douyin.png" alt="抖音" style="width: 20px; height: 20px;">
+        </a>
+        <a href="https://www.xiaohongshu.com/    " class="xiaohongshu" target="_blank" title="小红书">
+          <img src="assets/img/xiaohongshu.png" alt="小红书" style="width: 20px; height: 20px;">
+        </a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
+            <h2><span>奥林匹克森林公园</span><span class="underlight"> Photography</span></h2>
+            <p class="mt-3">A collection of 17 beautiful moments captured in 奥林匹克森林公园</p>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Hero Section -->
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery section">
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+        <div id="gallery-container">
+          <!-- 图片将通过 JavaScript 动态插入 -->
+        </div>
+      </div>
+    </section><!-- /Gallery Section -->
+
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <p class="fs-5">zhangyaohui200305@163.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="line"></div>
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Masonry & ImagesLoaded -->
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js    "></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js    "></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Gallery Initialization without Lazy Loading -->
+  <script>
+    const xiamenImages = [
+      { src: "assets/img/Collect/奥林匹克森林公园/奥林匹克森林公园-1.webp", title: "奥林匹克森林公园 1" },
+      { src: "assets/img/Collect/奥林匹克森林公园/奥林匹克森林公园-2.webp", title: "奥林匹克森林公园 2" }
+    ];
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const container = document.getElementById('gallery-container');
+
+      // 生成画廊项 - 使用 src 直接加载
+      let html = '';
+      xiamenImages.forEach(image => {
+        html += `
+          <div class="gallery-item">
+            <img src="${image.src}" alt="${image.title}"> 
+            <div class="gallery-links">
+              <a href="${image.src}" title="${image.title}" class="glightbox preview-link">
+                <i class="bi bi-arrows-angle-expand"></i>
+              </a>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+
+      // 初始化 Masonry 和 GLightbox
+      // 等待图片加载完成后再初始化 Masonry
+      imagesLoaded(container, function() {
+        const msnry = new Masonry(container, {
+          itemSelector: '.gallery-item',
+          percentPosition: true,
+          gutter: 16
+        });
+
+        // 初始化 GLightbox
+        const lightbox = GLightbox({
+          selector: '.glightbox'
+        });
+      });
+
+    });
+  </script>
+  
+</body>
+
+</html>
