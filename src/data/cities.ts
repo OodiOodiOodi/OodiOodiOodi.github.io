@@ -204,7 +204,7 @@ export const cities: City[] = [
   },
   {
     id: 'san-francisco',
-    name: 'San Francisco',
+    name: 'SanFrancisco',
     nameEn: 'San Francisco',
     country: 'usa',
     year: 2025,
@@ -213,7 +213,7 @@ export const cities: City[] = [
   },
   {
     id: 'new-york',
-    name: 'New York',
+    name: 'NewYork',
     nameEn: 'New York',
     country: 'usa',
     year: 2025,
