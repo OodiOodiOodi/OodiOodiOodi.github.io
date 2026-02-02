@@ -1,0 +1,134 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PhotoGallery from '../../components/PhotoGallery.astro';
+import { getCityById, getCitiesByCountry } from '../../data/cities';
+
+// Auto-generate paths from cities data
+export function getStaticPaths() {
+  const chinaCities = getCitiesByCountry('china');
+  return chinaCities.map((city) => ({
+    params: { id: city.id },
+  }));
+}
+
+const { id } = Astro.params;
+const city = getCityById(id || '');
+
+if (!city) {
+  return Astro.redirect('/404');
+}
+
+// Generate image paths for this city
+const getImagePaths = (cityName: string, count: number) => {
+  if (count === 0) return [];
+  return Array.from({ length: count }, (_, i) => ({
+    src: `/assets/img/Collect/${cityName}/${cityName}-${i + 1}.webp`,
+    title: `${cityName} ${i + 1}`,
+    alt: `${cityName} Photo ${i + 1}`,
+  }));
+};
+
+const images = getImagePaths(city.name, city.photoCount);
+---
+
+<Layout title={`${city.name} - Zhang Yaohui Photography`} description={`${city.description || city.name} photography collection by Zhang Yaohui`}>
+  <Header cityNav={{ id: city.id, country: 'china' }} />
+
+  <main class="main">
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>{city.name}</h1>
+              <p>{city.nameEn} • {city.year}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Breadcrumbs items={[
+        { title: 'Home', href: '/' },
+        { title: 'China', href: '/china' },
+        { title: city.name }
+      ]} />
+    </div>
+
+    {images.length > 0 ? (
+      <>
+        <!-- Gallery Section Header -->
+        <section class="section-header-section">
+          <div class="container" data-aos="fade-up">
+            <div class="section-header">
+              <h2>Photo Gallery</h2>
+              <p>{city.photoCount} photos</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Photo Gallery Component -->
+        <PhotoGallery images={images} columns={4} masonry={true} containered={true} />
+      </>
+    ) : (
+      <!-- No Photos Message -->
+      <section class="gallery section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="no-photos">
+            <i class="bi bi-image"></i>
+            <p>Photos coming soon...</p>
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .page-title {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/img/china-banner.webp');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0 60px;
+  }
+
+  .section-header-section {
+    padding-top: 60px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .no-photos {
+    text-align: center;
+    padding: 80px 20px;
+    color: #666;
+  }
+
+  .no-photos i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .no-photos p {
+    font-size: 1.2rem;
+  }
+
+  /* Override gallery section padding when using container */
+  .gallery.section {
+    padding: 0 0 60px 0;
+  }
+</style>

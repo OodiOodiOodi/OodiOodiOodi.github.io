@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PhotoGallery from '../components/PhotoGallery.astro';
+
+const featuredImages = [
+  { src: '/assets/img/gallery/gallery-1.webp', title: 'Gallery 1' },
+  { src: '/assets/img/gallery/gallery-2.webp', title: 'Gallery 2' },
+  { src: '/assets/img/gallery/gallery-3.webp', title: 'Gallery 3' },
+  { src: '/assets/img/gallery/gallery-4.webp', title: 'Gallery 4' },
+  { src: '/assets/img/gallery/gallery-5.webp', title: 'Gallery 5' },
+  { src: '/assets/img/gallery/gallery-6.webp', title: 'Gallery 6' },
+  { src: '/assets/img/gallery/gallery-7.webp', title: 'Gallery 7' },
+  { src: '/assets/img/gallery/gallery-8.webp', title: 'Gallery 8' }
+];
+---
+
+<Layout title="Zhang Yaohui - Photography Portfolio" description="Travel and street photography by Zhang Yaohui, featuring cities across China and the United States.">
+  <Header />
+
+  <main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
+            <h2><span>I'm </span><span class="underlight">Zhang Yaohui</span></h2>
+          </div>
+        </div>
+      </div>
+      <div class="page-title" data-aos="fade"></div>
+    </section>
+
+    <!-- Gallery Section -->
+    <PhotoGallery images={featuredImages} columns={4} masonry={false} />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .page-title {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/img/us-banner.webp');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0 60px;
+    min-height: 400px;
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+export interface Props {
+  cityNav?: { id: string; country: 'china' | 'usa' } | null;
+}
+
+const { cityNav } = Astro.props;
+
+let navItems;
+
+if (cityNav) {
+  // City detail page - show adjacent cities
+  const { getAdjacentCities } = await import('../data/cities');
+  const adjacentCities = getAdjacentCities(cityNav.id, cityNav.country, 4);
+  navItems = adjacentCities.map(city => ({
+    href: `/${cityNav.country}/${city.id}`,
+    text: city.name
+  }));
+} else {
+  // Default navigation - show China, USA, About
+  navItems = [
+    { href: '/china', text: 'China' },
+    { href: '/usa', text: 'United States' },
+    { href: '/about', text: 'About' }
+  ];
+}
+---
+<header id="header" class="header d-flex align-items-center sticky-top">
+	<div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+		<a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
+			<h1 class="sitename">Zhang Yaohui</h1>
+		</a>
+
+		<nav id="navmenu" class="navmenu">
+			<ul>
+				{navItems.map(item => (
+					<li><a href={item.href}><span>{item.text}</span></a></li>
+				))}
+			</ul>
+			<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+		</nav>
+		<div class="header-social-links"></div>
+	</div>
+</header>

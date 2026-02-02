@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+---
+
+<Layout title="About - Zhang Yaohui Photography" description="About Zhang Yaohui - photographer based in Shenzhen, China">
+  <Header />
+
+  <main class="main">
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>About Me</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Breadcrumbs items={[
+        { title: 'Home', href: '/' },
+        { title: 'About' }
+      ]} />
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4 justify-content-center">
+          <div class="col-lg-4">
+            <img src="/assets/img/onepiece.jpg" class="img-fluid" alt="Zhang Yaohui">
+          </div>
+          <div class="col-lg-5 content">
+            <h2>Zhang Yaohui</h2>
+            <p class="fst-italic py-3">Bachelor, University of International Business and Economics, 2022-2026</p>
+            <div class="row">
+              <div class="col-12">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>30 May</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Shenzhen, Guangdong, China</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>zhangyaohui200305@163.com</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Facility:</strong> <span>HuaWei Pura 70 Pro & Nikon Z30</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .about-section {
+    padding: 60px 0;
+  }
+
+  .content ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .content li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .content i {
+    margin-right: 10px;
+  }
+
+  .content strong {
+    min-width: 80px;
+  }
+</style>

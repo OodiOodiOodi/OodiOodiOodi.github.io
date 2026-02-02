@@ -1,0 +1,201 @@
+---
+export interface Props {
+	images: { src: string; title: string; alt?: string }[];
+	columns?: 3 | 4 | 5;
+	masonry?: boolean;
+	containered?: boolean;
+}
+
+const { images, columns = 4, masonry = true, containered = false } = Astro.props;
+
+const widthClass = columns === 3 ? 'col-xl-4 col-lg-6' : columns === 5 ? 'col-xl-2-4 col-lg-3' : 'col-xl-3 col-lg-4';
+const galleryClass = masonry ? 'masonry-gallery' : 'grid-gallery';
+const containerClass = containered ? 'container' : 'container-fluid';
+---
+
+<section id="gallery" class="gallery section">
+	<div class={containerClass} data-aos="fade-up" data-aos-delay="100">
+		<div class={galleryClass} id="gallery-container" data-masonry={masonry}>
+			{images.map((image) => (
+				<div class="gallery-item">
+					<a href={image.src} title={image.title} class="glightbox preview-link">
+						<picture>
+							<img
+								src={image.src}
+								class="img-fluid"
+								alt={image.alt || image.title}
+								loading="lazy"
+								decoding="async"
+							/>
+						</picture>
+						<div class="gallery-overlay">
+							<i class="bi bi-arrows-angle-expand"></i>
+						</div>
+					</a>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	/* Masonry layout using CSS columns */
+	.masonry-gallery {
+		column-count: 4;
+		column-gap: 8px;
+	}
+
+	/* Grid layout for non-masonry mode */
+	.grid-gallery {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 8px;
+		align-items: start;
+	}
+
+	.grid-gallery .gallery-item {
+		height: auto;
+	}
+
+	.gallery-item {
+		position: relative;
+		overflow: hidden;
+		border-radius: 8px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		break-inside: avoid;
+		margin-bottom: 8px;
+	}
+
+	.gallery-item img {
+		width: 100%;
+		height: auto;
+		display: block;
+		transition: transform 0.5s ease;
+	}
+
+	.gallery-item:hover img {
+		transform: scale(1.05);
+	}
+
+	.gallery-item a {
+		display: block;
+		text-decoration: none;
+		color: white;
+	}
+
+	.gallery-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.5);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	.gallery-item:hover .gallery-overlay {
+		opacity: 1;
+	}
+
+	.gallery-overlay i {
+		font-size: 2rem;
+		transition: transform 0.3s ease;
+	}
+
+	.gallery-item:hover .gallery-overlay i {
+		transform: scale(1.2);
+	}
+
+	/* Responsive column counts */
+	@media (max-width: 1399.98px) {
+		.masonry-gallery {
+			column-count: 3;
+		}
+	}
+
+	@media (max-width: 991.98px) {
+		.masonry-gallery {
+			column-count: 2;
+		}
+	}
+
+	@media (max-width: 575.98px) {
+		.masonry-gallery {
+			column-count: 1;
+		}
+		.grid-gallery {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	/* Responsive grid columns */
+	@media (max-width: 991.98px) {
+		.grid-gallery {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	@media (max-width: 767.98px) {
+		.grid-gallery {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>
+
+<script is:inline>
+	// Initialize GLightbox for image preview
+	document.addEventListener('DOMContentLoaded', () => {
+		if (typeof GLightbox !== 'undefined') {
+			GLightbox({
+				selector: '.glightbox',
+				openEffect: 'zoom',
+				closeEffect: 'fade',
+			});
+		}
+
+		// Reorder items for horizontal masonry layout
+		const gallery = document.querySelector('[data-masonry="true"]');
+		if (gallery) {
+			function reorderForHorizontalMasonry() {
+				const items = Array.from(gallery.querySelectorAll('.gallery-item'));
+				if (items.length === 0) return;
+
+				// Get column count from computed style
+				const style = window.getComputedStyle(gallery);
+				const columnCount = parseInt(style.columnCount) || 4;
+
+				// Calculate items per column
+				const itemsPerColumn = Math.ceil(items.length / columnCount);
+
+				// Create reordered array for horizontal filling
+				const reordered = [];
+				for (let col = 0; col < columnCount; col++) {
+					for (let row = 0; row < itemsPerColumn; row++) {
+						const index = row * columnCount + col;
+						if (index < items.length) {
+							reordered.push(items[index]);
+						}
+					}
+				}
+
+				// Clear and re-append in new order
+				gallery.innerHTML = '';
+				reordered.forEach(item => gallery.appendChild(item));
+			}
+
+			// Initial reorder
+			reorderForHorizontalMasonry();
+
+			// Reorder on resize with debounce
+			let resizeTimer;
+			window.addEventListener('resize', () => {
+				clearTimeout(resizeTimer);
+				resizeTimer = setTimeout(reorderForHorizontalMasonry, 250);
+			});
+		}
+	});
+</script>

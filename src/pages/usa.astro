@@ -1,0 +1,309 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getCitiesByCountry } from '../data/cities';
+
+const usaCities = getCitiesByCountry('usa');
+const years = [...new Set(usaCities.map(city => city.year))].sort((a, b) => b - a);
+---
+
+<Layout title="United States - Zhang Yaohui Photography" description="Photography collections from cities across the United States">
+	<Header />
+
+	<main class="main">
+		<!-- Page Title -->
+		<div class="page-title" data-aos="fade">
+			<div class="heading">
+				<div class="container">
+					<div class="row d-flex justify-content-center text-center">
+						<div class="col-lg-8">
+							<h1>United States</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<Breadcrumbs items={[
+				{ title: 'Home', href: '/' },
+				{ title: 'United States' }
+			]} />
+		</div>
+
+		<!-- Cities Section -->
+		<section id="cities" class="cities-section section">
+			<div class="container" data-aos="fade-up">
+				<div class="section-header">
+					<h2>American Cities</h2>
+					<p>Explore photography collections from across the United States</p>
+				</div>
+
+				<!-- Search and Filter -->
+				<div class="search-filter-bar mb-4">
+					<div class="row g-3 align-items-center">
+						<div class="col-md-6">
+							<div class="search-box">
+								<input
+									type="text"
+									id="citySearch"
+									placeholder="Search cities..."
+									class="form-control"
+								/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="year-filter">
+								<button class="filter-btn active" data-year="all">All Years</button>
+								{years.map(year => (
+									<button class="filter-btn" data-year={year}>{year}</button>
+								))}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row gy-4 cities-grid" id="citiesGrid">
+					{usaCities.map((city) => (
+						<div class="col-xl-3 col-lg-4 col-md-6 city-card-wrapper" data-city-name={city.name.toLowerCase()} data-year={city.year}>
+							<div class="city-card" data-aos="zoom-in" data-aos-delay="100">
+								<a href={`/usa/${city.id}`} class="city-link">
+									<img src={city.thumbnail} alt={city.name} loading="lazy">
+									<div class="city-card-content">
+										<h3>{city.name}</h3>
+										<p class="city-year">{city.year}</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					))}
+				</div>
+
+				<!-- No Results Message -->
+				<div id="noResults" class="no-results" style="display: none;">
+					<i class="bi bi-search"></i>
+					<p>No cities found matching your search.</p>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+	.cities-section {
+		padding: 60px 0;
+	}
+
+	.section-header {
+		text-align: center;
+		margin-bottom: 40px;
+	}
+
+	.section-header h2 {
+		font-size: 2.5rem;
+		margin-bottom: 10px;
+	}
+
+	.section-header p {
+		color: #666;
+		font-size: 1.1rem;
+	}
+
+	.search-filter-bar {
+		background: #1a1a1a;
+		padding: 20px;
+		border-radius: 10px;
+		margin-bottom: 30px;
+	}
+
+	.search-box input {
+		background: #2a2a2a;
+		border: 2px solid #3a3a3a;
+		border-radius: 8px;
+		padding: 12px 20px;
+		font-size: 1rem;
+		transition: border-color 0.3s ease;
+		color: #fff;
+	}
+
+	.search-box input:focus {
+		border-color: #4a4a4a;
+		outline: none;
+		box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+		background: #333;
+	}
+
+	.search-box input::placeholder {
+		color: #999;
+	}
+
+	.year-filter {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: flex-end;
+	}
+
+	.filter-btn {
+		background: #2a2a2a;
+		border: 2px solid #3a3a3a;
+		border-radius: 20px;
+		padding: 8px 20px;
+		font-size: 0.9rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		color: #ccc;
+	}
+
+	.filter-btn:hover {
+		background: #3a3a3a;
+		border-color: #4a4a4a;
+		color: #fff;
+	}
+
+	.filter-btn.active {
+		background: #3a3a3a;
+		border-color: #4a4a4a;
+		color: #fff;
+	}
+
+	.city-card {
+		position: relative;
+		overflow: hidden;
+		border-radius: 12px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		height: 100%;
+	}
+
+	.city-card:hover {
+		transform: translateY(-10px);
+		box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+	}
+
+	.city-card img {
+		width: 100%;
+		height: 250px;
+		object-fit: cover;
+		transition: transform 0.5s ease;
+	}
+
+	.city-card:hover img {
+		transform: scale(1.05);
+	}
+
+	.city-card-content {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+		color: white;
+		padding: 20px;
+	}
+
+	.city-card h3 {
+		margin: 0;
+		font-size: 1.5rem;
+		font-weight: 600;
+	}
+
+	.city-year {
+		margin: 5px 0 0;
+		font-size: 0.9rem;
+		opacity: 0.9;
+	}
+
+	.city-link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.city-card-wrapper.hidden {
+		display: none;
+	}
+
+	.no-results {
+		text-align: center;
+		padding: 60px 20px;
+		color: #666;
+	}
+
+	.no-results i {
+		font-size: 3rem;
+		margin-bottom: 15px;
+		display: block;
+	}
+
+	.no-results p {
+		font-size: 1.1rem;
+	}
+
+	.page-title {
+		background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/img/us-banner.webp');
+		background-size: cover;
+		background-position: center;
+		color: white;
+		padding: 100px 0 60px;
+	}
+
+	@media (max-width: 768px) {
+		.year-filter {
+			justify-content: flex-start;
+		}
+
+		.filter-btn {
+			font-size: 0.85rem;
+			padding: 6px 15px;
+		}
+	}
+</style>
+
+<script is:inline>
+	const searchInput = document.getElementById('citySearch');
+	const filterBtns = document.querySelectorAll('.filter-btn');
+	const cityCards = document.querySelectorAll('.city-card-wrapper');
+	const noResults = document.getElementById('noResults');
+	let currentYear = 'all';
+	let currentSearch = '';
+
+	function filterCities() {
+		let visibleCount = 0;
+
+		cityCards.forEach(card => {
+			const cityName = card.dataset.cityName || '';
+			const cardYear = card.dataset.year || '';
+
+			const matchesYear = currentYear === 'all' || cardYear === currentYear;
+			const matchesSearch = cityName.includes(currentSearch.toLowerCase());
+
+			if (matchesYear && matchesSearch) {
+				card.classList.remove('hidden');
+				visibleCount++;
+			} else {
+				card.classList.add('hidden');
+			}
+		});
+
+		if (noResults) {
+			noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+		}
+	}
+
+	searchInput?.addEventListener('input', (e) => {
+		currentSearch = e.target.value;
+		filterCities();
+	});
+
+	filterBtns.forEach(btn => {
+		btn.addEventListener('click', () => {
+			filterBtns.forEach(b => b.classList.remove('active'));
+			btn.classList.add('active');
+			currentYear = btn.dataset.year;
+			filterCities();
+		});
+	});
+</script>
